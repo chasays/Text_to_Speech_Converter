@@ -8,6 +8,10 @@ it's easy to practice english spoken by right pronunciation.
 
 This project provides a simple tool that can convert text to speech, helping you practice your English speaking skills.
 
+### Preview as below
+
+![preview](./preview.png)
+
 **Features**
 
 - [ ] Supports multiple languages, including English, Chinese, Japanese, Korean, etc.
