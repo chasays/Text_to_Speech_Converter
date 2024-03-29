@@ -1,8 +1,11 @@
+import os
 import asyncio
 import edge_tts
 from flask import Flask, request, send_file
 
 app = Flask(__name__)
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
 
 def convert_text_to_speech(text, voice, output_file):
     """
@@ -16,6 +19,7 @@ def convert_text_to_speech(text, voice, output_file):
     async def amain() -> None:
         """Main async function"""
         communicate = edge_tts.Communicate(text, voice)
+
         await communicate.save(output_file)
 
     try:
@@ -39,7 +43,8 @@ def web_convert_text_to_speech():
         voice = request.form['voice']
         # output_file = 'output.mp3'
         output_file = text[:20].replace(' ', '_') + '.mp3'
-        convert_text_to_speech(text, voice, output_file)
+        full_path_output_file = os.path.join(current_dir, output_file)
+        convert_text_to_speech(text, voice, full_path_output_file)
         return send_file(output_file, as_attachment=True)
     return '''
         <!DOCTYPE html>
